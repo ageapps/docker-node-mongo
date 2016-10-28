@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <script type="text/javascript">
+    function checkUsername() {
+      var name = document.getElementById('user_name').value;
+
+      if (!name) {
+          alert('You have to fill in User Name.');
+          return false;
+      } else {
+          return true;
+      }
+  }
+    </script>
+    <h1><%= title %></h1>
+    <form action="/users" method="post">
+      <label>User</label>
+      <input id="user_name" type="text" name="user[username]" placeholder="Enter the Username" required autofocus>
+      <button type="submit" onclick="return checkUsername()">Submit</button>
+      <p><%= message %></p>
+    </form>
+    <p>
+      <a href="/users">See Users</a>
+    </p>
+    <p>
+      <a href="/users/msg">Add Messages</a>
+    </p>
+    <p>
+      <a href="/">Index</a>
+    </p>
+  </body>
+</html>

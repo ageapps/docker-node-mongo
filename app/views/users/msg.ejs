@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <script type="text/javascript">
+    function checkMsg() {
+      var name = document.getElementById('user_name').value;
+      var msg = document.getElementById('user_msg').value;
+
+      if (!name || !msg) {
+          alert('You have to fill in Username and message.');
+          return false;
+      } else {
+          return true;
+      }
+  }
+    </script>
+    <h1><%= title %></h1>
+    <form action="/users/msg" method="post">
+      <label>User</label>
+      <input id="user_name" type="text" name="user[username]" placeholder="Enter the Username" required autofocus>
+      <label>Message</label>
+      <input id="user_msg" type="text" name="user[message]" placeholder="Enter a message for this user" required autofocus>
+      <button type="submit" onclick="return checkMsg()">Submit</button>
+      <p><%= message %></p>
+    </form>
+    <p>
+      <a href="/users">See Users</a>
+    </p>
+    <p>
+      <a href="/users/new">New User</a>
+    </p>
+    <p>
+      <a href="/">Index</a>
+    </p>
+  </body>
+</html>

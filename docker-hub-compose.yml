@@ -1,0 +1,19 @@
+version: "2"
+services:
+  server:
+    build: .
+    ports:
+      - "8080:3000"
+    links:
+      - db
+    volumes:
+      - ./database:/data # volume in host -> $(pwd)/database
+      - ./app:/server # volume in host -> $(pwd)/app
+
+  db:
+    image: mongo
+    command: mongod --smallfiles
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./database:/data # volume in host -> $(pwd)/database

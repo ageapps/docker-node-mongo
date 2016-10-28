@@ -1,0 +1,22 @@
+version: "2"
+services:
+  server:
+    image: node
+    ports:
+      - "8080:3000"
+    links:
+      - db
+    working_dir: /server
+    volumes:
+      - ./database:/data # volume in host -> $(pwd)/database
+      - ./app:/server # volume in host -> $(pwd)/app
+    command: bash -c "npm install && npm start"
+
+
+  db:
+    image: mongo
+    command: mongod --smallfiles
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./database:/data # volume in host -> $(pwd)/database

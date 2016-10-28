@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+      <% if (users && users.length > 0) { %>
+        <ul>
+
+          <% for (var i in users){ %>
+
+            <li>
+            <p>Username: <%= users[i].name %></p>
+              <% if ( users[i].messages && users[i].messages.length > 0) {
+                var userMessages = users[i].messages; %>
+
+              <p>Messages: <%= userMessages.length %></p>
+                  <ul>
+                    <% for (var z = 0; z < userMessages.length; z++) { %>
+                      <li>  "<%= userMessages[z].msg %>"</li>
+                    <% } %>
+                  </ul>
+              <% } else { %>
+              <p>No messages for this user</p>
+             <% } %>
+            </li>
+
+          <% } %>
+       </ul>
+      <% } else { %>
+        <p>
+        No users created
+        </p>
+    <%  } %>
+    <p>
+      <a href="/users/new">New User</a>
+    </p>
+    <p>
+      <a href="/users/msg">Add Messages</a>
+    </p>
+    <p>
+      <a href="/">Index</a>
+    </p>
+  </body>
+</html>
