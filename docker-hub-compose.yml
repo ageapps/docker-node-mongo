@@ -1,14 +1,13 @@
 version: "2"
 services:
   server:
-    build: .
+    image: ageapps/docker-node-mongo
     ports:
       - "8080:3000"
     links:
       - db
     volumes:
       - ./database:/data # volume in host -> $(pwd)/database
-      - ./app:/server # volume in host -> $(pwd)/app
 
   db:
     image: mongo
@@ -17,3 +16,5 @@ services:
       - "27017:27017"
     volumes:
       - ./database:/data # volume in host -> $(pwd)/database
+
+# curl https://raw.githubusercontent.com/ageapps/docker-node-mongo/master/docker-hub-compose.yml -o docker-compose.yml

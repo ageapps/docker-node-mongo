@@ -13,6 +13,7 @@ Following the [Microservices architecture], the system consists on two services 
 Yo can find a demo, working [here]
 
 ## Usage with git
+Downloading the source code
 
 ```groovy
 $ git clone https://github.com/ageapps/docker-node-mongo.git
@@ -20,13 +21,26 @@ $ cd docker-node-demo
 $ docker-compose up
 // connect in your browser to <host IP>:8080
 ```
+
+## Usage with docker-compose, without source code
+Just download docker-compose file to pull all images and build the app.
+
+```groovy
+// download docker-compose file
+$ curl https://raw.githubusercontent.com/ageapps/docker-node-mongo/master/docker-hub-compose.yml -o docker-compose.yml
+// run application
+$ docker-compose up
+// connect in your browser to <host IP>:8080
+```
+
 ## Usage with Docker Hub
+No download needed, images will pull
 
 ```groovy
 // run mongo service
-$ docker run -v "$(pwd)":/data --name mongo -d mongo mongod --smallfiles
-// run docker-node-demo image
-$ docker run -d --name node_server -v "$(pwd)/database":/data --link mongo:db -p 8080:3000 ageapps/docker-node-demo
+$ docker run -v "$(pwd)"/database:/data --name mongo -d mongo mongod --smallfiles
+// run docker-node-mongo image
+$ docker run -d --name node_server -v "$(pwd)/database":/data --link mongo:db -p 8080:3000 ageapps/docker-node-mongo
 // connect in your browser to <host IP>:8080
 ```
 
