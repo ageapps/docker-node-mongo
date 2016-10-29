@@ -38,9 +38,9 @@ No download needed, images will pull automatically.
 
 ```groovy
 // run mongo service
-$ docker run -v "$(pwd)"/database:/data --name mongo -d mongo mongod --smallfiles
+$ docker run -v "$(pwd)"/database:/data --name mongo_db -d mongo mongod --smallfiles
 // run docker-node-mongo image
-$ docker run -d --name node_server -v "$(pwd)/database":/data --link mongo:db -p 8080:3000 ageapps/docker-node-mongo
+$ docker run -d --name node_server -v "$(pwd)/database":/data --link mongo_db:db -p 8080:3000 ageapps/docker-node-mongo
 // connect in your browser to <host IP>:8080
 ```
 
