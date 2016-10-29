@@ -34,7 +34,7 @@ $ docker-compose up
 ```
 
 ## Usage with Docker Hub
-No download needed, images will pull
+No download needed, images will pull automatically.
 
 ```groovy
 // run mongo service
