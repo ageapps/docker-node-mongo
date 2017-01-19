@@ -4,17 +4,11 @@ services:
     image: ageapps/docker-node-mongo
     ports:
       - "8080:3000"
-    links:
+    depends_on:
       - db
-    volumes:
-      - ./database:/data # volume in host -> $(pwd)/database
 
   db:
     image: mongo
     command: mongod --smallfiles
     ports:
       - "27017:27017"
-    volumes:
-      - ./database:/data # volume in host -> $(pwd)/database
-
-# curl https://raw.githubusercontent.com/ageapps/docker-node-mongo/master/docker-hub-compose.yml -o docker-compose.yml

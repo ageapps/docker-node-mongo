@@ -10,9 +10,7 @@ var routes = require('./routes/index');
 var methodOverride = require('method-override');
 
 var app = express();
-// Set up mongo
-app.mongoose = require('mongoose');
-app.db = app.mongoose.connection;
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -65,10 +63,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-app.db.on('error', console.error.bind(console, 'connection error:'));
-app.db.once('open', function() {
-    console.log("Connected succesfully to MongoDB");
-    routes.connect();
-});
+
 
 module.exports = app;

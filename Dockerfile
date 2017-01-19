@@ -1,4 +1,6 @@
-FROM node
+FROM node:latest
+
+MAINTAINER Adrián García Espinosa "age.apps.dev@gmail.com"
 
 # Create app directory
 RUN mkdir /server
@@ -7,7 +9,7 @@ RUN mkdir /server
 WORKDIR /server
 
 # Bundle app source
-COPY app /server/
+ADD app/package.json /server/package.json
 
 # Install npm and bower dependencies
 RUN npm install

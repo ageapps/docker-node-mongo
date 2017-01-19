@@ -5,3 +5,4 @@ npm-debug.log*
 docker-compose-dev.yml
 Dockerfile-dev
 app/node_modules
+node_modules

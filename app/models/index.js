@@ -1,8 +1,18 @@
 'use strict';
 
-var app = require('../app');
-var userSchema = require('./user')(app.mongoose);
-var messageSchema = require('./message')(app.mongoose);
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://db:27017');
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    console.log("Connected to MongoDB");
+});
+
+
+var userSchema = require('./user')(mongoose);
+var messageSchema = require('./message')(mongoose);
 
 
 
@@ -20,8 +30,8 @@ userSchema.statics.findByName = function(name, cb) {
 };
 
 
-var User = app.mongoose.model('User', userSchema);
-var Message = app.mongoose.model('Message', messageSchema);
+var User = mongoose.model('User', userSchema);
+var Message = mongoose.model('Message', messageSchema);
 
 exports.User = User;
 exports.Message = Message;
