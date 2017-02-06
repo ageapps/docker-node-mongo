@@ -1,0 +1,21 @@
+version: "2"
+services:
+  mongodb-master:
+   build: .
+   environment:
+    - RSET=rs0
+    - SLAVE1=mongodb-slave1
+    - SLAVE2=mongodb-slave2
+   ports:
+     - "27017:27017"
+   depends_on:
+     - mongodb-slave1
+     - mongodb-slave2
+
+  mongodb-slave1:
+   image: mongo
+   command: mongod --smallfiles --replSet "rs0"
+
+  mongodb-slave2:
+   image: mongo
+   command: mongod --smallfiles --replSet "rs0"

@@ -12,6 +12,15 @@ Following the [Microservices architecture], the system consists on two services 
 
 Yo can find a demo, working [here]
 
+## Using MongoDB replica sets
+You just need to use the ```docker-compose.rps.yml``` compose file:
+
+
+```groovy
+$ docker-compose -f docker-compose.rps.yml up
+// connect in your browser to <host IP>:8080
+```
+
 ## Usage with git
 Downloading the source code
 
