@@ -9,10 +9,12 @@ RUN mkdir /server
 WORKDIR /server
 
 # Bundle app source
-ADD app/package.json /server/package.json
+COPY app/package.json /server/package.json
 
 # Install npm and bower dependencies
 RUN npm install
+
+COPY app /server
 
 EXPOSE 3000
 

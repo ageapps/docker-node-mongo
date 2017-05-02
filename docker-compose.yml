@@ -6,11 +6,13 @@ services:
       - "8080:3000"
     depends_on:
       - db
-    volumes:
-      - ./app:/server # volume in host -> $(pwd)/app
+    # volumes:
+      # - ./app:/server # volume in host -> $(pwd)/app
 
   db:
     image: mongo
     command: mongod --smallfiles
+    volumes:
+      - ./mongo/db:/data/db
     ports:
       - "27017:27017"
