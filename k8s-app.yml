@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: app
+spec:
+  selector:
+    app: node-mongo-app
+    tier: backend
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: http
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: node-mongo-app
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: "node-mongo"
+          image: "node-mongo:v1"
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: "SERVER_PORT"
+              value: "8080"
+            - name: "DB_PORT"
+              value: "27017"
+            - name: "DB_HOST"
+              value: "mongo"

@@ -1,13 +1,17 @@
 'use strict';
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://db:27017');
+
+var port = process.env.DB_PORT || '27017';
+var host = process.env.DB_HOST || 'db';
+
+mongoose.connect('mongodb://' + host + ':' + port);
 
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log("Connected to MongoDB");
+db.once('open', function () {
+    console.log("Connected to MongoDB to: " + host + ":" + port);
 });
 
 
@@ -17,13 +21,13 @@ var messageSchema = require('./message')(mongoose);
 
 
 // find user by name
-userSchema.methods.addMsg = function(msg, cb) {
+userSchema.methods.addMsg = function (msg, cb) {
     this.messages.push(msg);
     return this.save(cb)
 };
 
 // find user by name
-userSchema.statics.findByName = function(name, cb) {
+userSchema.statics.findByName = function (name, cb) {
     return this.findOne({
         name: name
     }, cb);

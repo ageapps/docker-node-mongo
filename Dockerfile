@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:alpine
 
 MAINTAINER Adrián García Espinosa "age.apps.dev@gmail.com"
 
@@ -15,7 +15,5 @@ COPY app/package.json /server/package.json
 RUN npm install
 
 COPY app /server
-
-EXPOSE 3000
 
 CMD npm start
