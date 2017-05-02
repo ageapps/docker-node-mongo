@@ -27,6 +27,14 @@ spec:
       containers:
         - name: mongo
           image: "mongo"
+          # volumeMounts:
+          #   - mountPath: /data/db
+          #     name: db-volume
           ports:
             - name: http
               containerPort: 27017
+      # volumes:
+      #   - name: db-volume
+      #     hostPath:
+      #       # directory location on host
+      #       path: /mongo/db
