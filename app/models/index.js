@@ -4,8 +4,11 @@ var mongoose = require('mongoose');
 
 var port = process.env.DB_PORT || '27017';
 var host = process.env.DB_HOST || 'db';
+var mongo_pass = process.env.MONGO_PASSWORD || '';
+var mongo_user = process.env.MONGO_USERNAME || '';
 
-mongoose.connect('mongodb://' + host + ':' + port);
+
+mongoose.connect('mongodb://' + mongo_user + ':'+ mongo_pass + host + ':' + port );
 
 var db = mongoose.connection;
 

@@ -1,11 +1,15 @@
-version: "2"
+version: "2.1"
 services:
   server:
     build: .
     ports:
       - "8080:3000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    environment:
+      - MONGO_USERNAME=admin
+      - MONGO_PASSWORD=pass
     # volumes:
       # - ./app:/server # volume in host -> $(pwd)/app
 
@@ -16,3 +20,11 @@ services:
       - ./mongo/db:/data/db
     ports:
       - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    healthcheck:
+      test: ["CMD", "echo", "show dbs", "|", "mongo"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
