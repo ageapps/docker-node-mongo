@@ -7,18 +7,29 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      - MONGO_USERNAME=node
+      - MONGO_PASSWORD=node
+      - MONGO_DATABASE=nodedb
     # volumes:
       # - ./app:/server # volume in host -> $(pwd)/app
 
   db:
-    image: mongo
-    command: mongod --smallfiles
+    build: ./auth-mongo
     volumes:
       - ./mongo/db:/data/db
     # ports:
     #   - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+      - MONGO_DB_APP_PASSWORD=node
+      - MONGO_DB_APP_USERNAME=node
+      - MONGO_DB_APP_DATABASE=nodedb
     healthcheck:
       test: ["CMD", "echo", "show dbs", "|", "mongo"]
       interval: 30s
       timeout: 10s
       retries: 3
+    command: mongod --smallfiles
+

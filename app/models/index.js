@@ -6,15 +6,26 @@ var port = process.env.DB_PORT || '27017';
 var host = process.env.DB_HOST || 'db';
 var mongo_pass = process.env.MONGO_PASSWORD || '';
 var mongo_user = process.env.MONGO_USERNAME || '';
+var mongo_db = process.env.MONGO_DATABASE || '';
 
-
-mongoose.connect('mongodb://' + mongo_user + ':'+ mongo_pass + host + ':' + port );
+var url = 'mongodb://' + mongo_user + ':' + mongo_pass + '@' + host + ':' + port + '/' + mongo_db;
+/**
+ * Initialize the connection.
+ * @method init
+**/
+mongoose.connect(url, {
+    server: {
+        autoReconnect: true,
+        reconnectTries: 30,
+        reconnectInterval: 1000
+    }
+});
 
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-    console.log("Connected to MongoDB to: " + host + ":" + port);
+    console.log("Connected to MongoDB to: " + url);
 });
 
 
