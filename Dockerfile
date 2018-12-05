@@ -8,6 +8,8 @@ RUN mkdir /server
 # VOLUME ./app:/server
 WORKDIR /server
 
+RUN npm install -gq nodemon
+
 # Bundle app source
 COPY app/package.json /server/package.json
 

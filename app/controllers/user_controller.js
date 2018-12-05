@@ -64,15 +64,15 @@ function newUser(username, cb) {
     });
 };
 
-
 function addMsg(username, msg, cb) {
     //console.log("addMsg: " + JSON.stringify(msg));
     models.User.findByName(username, function(err, user) {
         if (user) {
             var message = new models.Message({
                 msg: msg,
-                createdAt: new Date(msg.createdAt)
+                createdAt: new Date()
             });
+            // console.log(message)
             user.addMsg(message, function(err, user) {
                 cb(true, user);
             });

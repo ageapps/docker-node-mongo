@@ -5,7 +5,8 @@ module.exports = function(mongoose) {
         name: String,
         messages: [messageSchema]
     }, {
-        timestamps: true
+        timestamps: true,
+        usePushEach: true,
     });
     return userSchema;
 }
