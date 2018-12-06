@@ -7,8 +7,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    volumes:
-      - ./app:/server # volume in host -> $(pwd)/app
+    # volumes:
+    #   - ./app:/server # volume in host -> $(pwd)/app
 
     command: [nodemon, ./bin/www]
 
